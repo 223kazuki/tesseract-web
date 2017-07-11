@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" class="example">
+  <head>
+    <title>Tesseract Example</title>
+    <link rel="stylesheet" href="/assets/normalize.css/normalize.css">
+    <link rel="stylesheet" href="/css/site.css">
+    <link rel="stylesheet" href="/assets/dropzone/min/dropzone.min.css">
+    <style type="text/css">
+      .wrapper {
+      width: 100%;
+      text-align: center;
+      }
+    </style>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  </head>
+  <body>
+    <h1>Tesseract Example</h1>
+    </br>
+    <div class="wrapper">
+      <p><a href="https://github.com/tesseract-ocr/">tesseract</a>によるOCRサンプルです。</p>
+      <h2>File upload</h2>
+    </div>
+    <form action="/file-upload" class="dropzone" id="my-awesome-dropzone">
+      <div class="fallback">
+        <input name="file" type="file" multiple />
+      </div>
+    </form>
+    <br/>
+    <div class="wrapper">
+      <h2>OCR Result</h2>
+      <textarea id="result" cols="100" rows="10"></textarea>
+    </div>
+  </body>
+  <script src="/assets/dropzone/min/dropzone.min.js"></script>
+  <script>
+    Dropzone.options.myAwesomeDropzone = {
+    success:function(_file, _return, _xml){
+    console.log(_return);
+    $("textarea#result").val(_return);
+    },
+    maxFilesize: 10,
+    acceptedFiles: 'image/*',
+    dictFileTooBig: "uploaded file is too large({{filesize}}MiB). limit: {{maxFilesize}}MiB.",
+    dictInvalidFileType: "Image file only"};
+  </script>
+</html>

@@ -1,0 +1,27 @@
+{:duct.core/project-ns  tesseract
+ :duct.core/environment :production
+
+ :duct.module/logging {}
+ :duct.module.web/site {}
+
+ :duct.core/handler
+ {:router     #ig/ref :duct.router/cascading
+  :middleware [#ig/ref :duct.middleware.web/not-found
+               #ig/ref :duct.middleware.web/defaults
+               #ig/ref :duct.middleware.web/log-requests
+               #ig/ref :duct.middleware.web/log-errors
+               #ig/ref :duct.middleware.web/stacktrace]}
+
+ :duct.middleware.web/defaults
+ {:params    {:urlencoded true, :keywordize true}
+  :responses {:not-modified-responses true
+              :absolute-redirects     true
+              :content-types          true
+              :default-charset        "utf-8"}
+  :security  {:anti-forgery false}}
+
+ :duct.router/cascading
+ [#ig/ref :tesseract.handler/example]
+
+ :tesseract.handler/example
+ {}}
